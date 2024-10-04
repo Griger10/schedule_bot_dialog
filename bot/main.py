@@ -3,8 +3,12 @@ from asyncio import WindowsSelectorEventLoopPolicy
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram_dialog import setup_dialogs
+from bot.dialogs.main.dialogs import start_dialog
+from bot.handlers import commands
 from bot.middlewares.i18n import TranslatorRunnerMiddleware
 from bot.middlewares.session import DatabaseMiddleware
+from bot.middlewares.users import TrackAllUsersMiddleware
 from bot.utils.i18n import create_translator_hub
 from config import load_config, load_database
 from aiogram import Bot, Dispatcher
@@ -24,7 +28,6 @@ async def main():
     async with engine.begin() as connection:
         await connection.execute(text('SELECT 1'))
 
-
     translator_hub = create_translator_hub()
     dp = Dispatcher(storage=storage)
     bot = Bot(token=config.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
@@ -32,6 +35,11 @@ async def main():
     dp.update.middleware(TranslatorRunnerMiddleware())
     dp.update.outer_middleware(DatabaseMiddleware(session_maker))
     dp.message.outer_middleware(TrackAllUsersMiddleware())
+
+    dp.include_router(commands.router)
+    dp.include_router(start_dialog)
+
+    setup_dialogs(dp)
 
     print('start bot...')
     await dp.start_polling(bot, _translator_hub=translator_hub)
