@@ -16,5 +16,5 @@ class IGroup(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    async def set_group(self, group_id):
+    async def set_group(self, group_id: int, user_id: int):
         raise NotImplementedError
