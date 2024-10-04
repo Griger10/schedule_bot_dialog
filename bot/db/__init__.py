@@ -1,9 +1,11 @@
-from bot.db.models import User, Group
+from bot.db.models import User, Group, Schedule, Lesson
 
 from bot.db.base import Base
 
 __all__ = [
     'Base',
     'User',
-    'Group'
+    'Group',
+    'Schedule',
+    'Lesson'
 ]
