@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 
 
-class ISchedule(ABC):
+class IUser(ABC):
+
     @abstractmethod
-    async def get_schedule(self, day):
+    async def upsert_user(self, tg_id: int, username: str):
         raise NotImplementedError
