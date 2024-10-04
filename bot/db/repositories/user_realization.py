@@ -15,6 +15,5 @@ class UserRealization(IUser):
         await self.session.commit()
 
     async def check_user(self, tg_id: int):
-        stmt = select(User).where(tg_id=tg_id)
-        user = await self.session.execute(stmt)
-        return user.scalars().all()[0]
+        user = await self.session.get(User, {"telegram_id": tg_id})
+        return user

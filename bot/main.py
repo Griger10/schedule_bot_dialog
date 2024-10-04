@@ -21,7 +21,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 async def main():
     storage = MemoryStorage()
     config = await load_config()
-    database_config = await load_database()
+    database_config = load_database()
 
     engine = create_async_engine(url=database_config.dsn, echo=database_config.is_echo)
     session_maker = async_sessionmaker(engine, expire_on_commit=False)

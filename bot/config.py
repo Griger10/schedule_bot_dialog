@@ -20,7 +20,7 @@ async def load_config() -> Config:
     return Config(bot_token=bot_token)
 
 
-async def load_database() -> DatabaseConfig:
+def load_database() -> DatabaseConfig:
     env = Env()
     env.read_env()
     dsn = env("DATABASE_DSN")
