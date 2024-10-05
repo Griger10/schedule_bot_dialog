@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from bot.db import Base
+from bot.db.base import Base
 from sqlalchemy import String, func
 from sqlalchemy.orm import Mapped, mapped_column
 

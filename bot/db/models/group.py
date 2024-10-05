@@ -1,4 +1,4 @@
-from bot.db import Base
+from bot.db.base import Base
 from sqlalchemy.orm import mapped_column, Mapped
 
 
