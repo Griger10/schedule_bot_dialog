@@ -30,3 +30,8 @@ class GroupRealization(IGroup):
         stmt = update(User).where(User.telegram_id == user_id).values(group=group_id)
         await self.session.execute(stmt)
         await self.session.commit()
+
+    @staticmethod
+    async def get_group(session, user_id):
+        user = await session.get(User, user_id)
+        return user.group

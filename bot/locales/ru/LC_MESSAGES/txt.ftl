@@ -25,3 +25,6 @@ admin-info = admin-admin = Админ-панель предлагает след
 
     /add_group ИПсп-123
 
+
+lesson-success = Предмет {$lesson_name } успешно добавлен в БД!
+
