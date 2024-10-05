@@ -1,8 +1,8 @@
 from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button, Select
 from aiogram_dialog.widgets.text import Format, Const
-from bot.dialogs.main.getters import get_hello, get_groups
-from bot.dialogs.main.handlers import set_group_dialog
+from bot.dialogs.main.getters import get_hello, get_groups, get_welcome
+from bot.dialogs.main.handlers import set_group_dialog, choose_group
 from bot.fsm.states import StartFSM
 
 start_dialog = Dialog(
@@ -25,5 +25,10 @@ start_dialog = Dialog(
         ),
         state=StartFSM.choose_group,
         getter=get_groups
+    ),
+    Window(
+        Format('{welcome_user}'),
+        getter=get_welcome,
+        state=StartFSM.welcome_message,
     )
 )

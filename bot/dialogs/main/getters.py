@@ -13,3 +13,7 @@ async def get_hello(dialog_manager: DialogManager, i18n: TranslatorRunner,
 async def get_groups(session: AsyncSession, dialog_manager: DialogManager):
     group_repository = None
     pass
+
+
+async def get_welcome(dialog_manager: DialogManager, i18n: TranslatorRunner):
+    return {'welcome_user': i18n.welcome.user()}
