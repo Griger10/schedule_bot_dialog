@@ -2,6 +2,7 @@ import sys
 from asyncio import WindowsSelectorEventLoopPolicy
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from aiogram_dialog import setup_dialogs
 from bot.dialogs.main.dialogs import start_dialog
@@ -19,7 +20,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
 async def main():
     redis = Redis(host='localhost')
-    storage = RedisStorage(redis=redis)
+    storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
     config = load_config()
     database_config = load_database()
 

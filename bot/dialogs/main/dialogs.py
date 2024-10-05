@@ -1,5 +1,5 @@
 from aiogram_dialog import Dialog, Window
-from aiogram_dialog.widgets.kbd import Button, Select
+from aiogram_dialog.widgets.kbd import Button, Select, Group
 from aiogram_dialog.widgets.text import Format, Const
 from bot.dialogs.main.getters import get_hello, get_groups, get_welcome
 from bot.dialogs.main.handlers import set_group_dialog, choose_group
@@ -16,12 +16,15 @@ start_dialog = Dialog(
     ),
     Window(
         Const(text='Выберите группу из списка:'),
-        Select(
-            Format('{item[2]}'),
-            id='group',
-            item_id_getter=lambda x: x[0],
-            items='groups',
-            on_click=choose_group
+        Group(
+            Select(
+                Format('{item.name}'),
+                id='group',
+                item_id_getter=lambda x: x.id,
+                items='groups',
+                on_click=choose_group
+            ),
+            width=1
         ),
         state=StartFSM.choose_group,
         getter=get_groups

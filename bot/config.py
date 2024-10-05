@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class Config:
     bot_token: str
-    admin_ids: list
+    admin_ids: list[int]
 
 
 @dataclass

@@ -23,7 +23,7 @@ class GroupRealization(IGroup):
     async def get_groups(self):
         stmt = select(Group).select_from(Group)
         result = await self.session.execute(stmt)
-        groups = result.all()
+        groups = result.scalars().all()
         return groups
 
     async def set_group(self, group_id: int, user_id: int):
