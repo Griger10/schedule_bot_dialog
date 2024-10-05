@@ -1,11 +1,13 @@
-from aiogram import Router
-from aiogram.filters import Command
+from aiogram import Router, F
+from aiogram.filters import Command, MagicData
 from aiogram.types import Message
 from bot.db.repositories.group_realization import GroupRealization
 from fluentogram import TranslatorRunner
 from sqlalchemy.ext.asyncio import AsyncSession
 
 router = Router()
+
+router.message.filter(MagicData(F.event.chat.id.in_(F.admin_ids)))
 
 
 @router.message(Command(commands=['admin']))

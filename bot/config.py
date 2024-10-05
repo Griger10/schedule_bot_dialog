@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class Config:
     bot_token: str
-    admins_ids: list
+    admin_ids: list
 
 
 @dataclass
@@ -14,12 +14,12 @@ class DatabaseConfig:
     is_echo: bool
 
 
-async def load_config() -> Config:
+def load_config() -> Config:
     env = Env()
     env.read_env()
     bot_token = env("BOT_TOKEN")
     admin_ids = [int(i) for i in env.list('ADMIN_IDS') if i != '']
-    return Config(bot_token=bot_token, admins_ids=admin_ids)
+    return Config(bot_token=bot_token, admin_ids=admin_ids)
 
 
 def load_database() -> DatabaseConfig:
