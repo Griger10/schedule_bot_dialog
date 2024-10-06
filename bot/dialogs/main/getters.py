@@ -2,6 +2,7 @@ from aiogram.types import User
 from aiogram_dialog import DialogManager
 from bot.db.repositories.group_realization import GroupRealization
 from bot.db.repositories.lesson_realization import LessonRealization
+from bot.db.repositories.schedule_realization import ScheduleRealization
 from fluentogram import TranslatorRunner
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -22,8 +23,17 @@ async def get_welcome(dialog_manager: DialogManager, i18n: TranslatorRunner, **k
     return {'welcome_user': i18n.welcome.user()}
 
 
-async def monday_schedule(dialog_manager: DialogManager, i18n: TranslatorRunner,
-                          session: AsyncSession, event_from_user: User, **kwargs):
-    user_id = event_from_user.id
-    l = LessonRealization(session=session)
-    lessons = await l.get_lessons(user_id, )
+async def get_days(dialog_manager: DialogManager, **kwargs):
+    days = [
+        ('Понедельник', 1),
+        ('Вторник', 2),
+        ('Среда', 3),
+        ('Четверг', 4),
+        ('Пятница', 5)
+        ]
+    return {'days': days}
+
+
+async def get_day_schedule(dialog_manager: DialogManager, **kwargs):
+    schedule = dialog_manager.dialog_data.get('day_schedule')
+    return {'day_schedule': schedule}

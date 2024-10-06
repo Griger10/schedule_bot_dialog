@@ -8,8 +8,5 @@ class StartFSM(StatesGroup):
 
 
 class MainFSM(StatesGroup):
-    monday = State()
-    tuesday = State()
-    wednesday = State()
-    thursday = State()
-    friday = State()
+    choose_day = State()
+    day_schedule = State()

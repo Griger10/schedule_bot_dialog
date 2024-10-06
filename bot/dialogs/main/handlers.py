@@ -2,7 +2,8 @@ from aiogram.types import User, CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.kbd import Button, Select
 from bot.db.repositories.group_realization import GroupRealization
-from bot.fsm.states import StartFSM
+from bot.db.repositories.schedule_realization import ScheduleRealization
+from bot.fsm.states import StartFSM, MainFSM
 
 
 async def set_group_dialog(callback: CallbackQuery, button: Button, dialog_manager: DialogManager):
@@ -18,3 +19,12 @@ async def choose_group(callback: CallbackQuery, widget: Select, dialog_manager: 
     await callback.answer()
 
 
+async def day_schedule(callback: CallbackQuery, widget: Select,
+                       dialog_manager: DialogManager, item_id: str):
+    session = dialog_manager.middleware_data['session']
+    schedule_repository = ScheduleRealization(session)
+    lessons = await schedule_repository.get_schedule(callback.message.chat.id, int(item_id))
+    res = '\n\n'.join(f"{ls.number_of_lesson} пара в {ls.audience_number} --- <b>{ls.name}" for ls in lessons)
+    dialog_manager.dialog_data.update(day_schedule=res)
+    await dialog_manager.switch_to(MainFSM.day_schedule)
+    await callback.answer()

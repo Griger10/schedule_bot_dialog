@@ -1,10 +1,10 @@
 from aiogram_dialog import Dialog, Window
-from aiogram_dialog.widgets.kbd import Button, Select, Group
+from aiogram_dialog.widgets.kbd import Button, Select, Group, Row, Url, Column
 from aiogram_dialog.widgets.text import Format, Const
-from bot.dialogs.main.getters import get_hello, get_groups, get_welcome
-from bot.dialogs.main.handlers import set_group_dialog, choose_group
+from bot.dialogs.main.getters import get_hello, get_groups, get_welcome, get_days, get_day_schedule
+from bot.dialogs.main.handlers import set_group_dialog, choose_group, day_schedule
 from bot.fsm.states import StartFSM, MainFSM
-from bot.utils.dialogs import go_next
+from bot.utils.dialogs import go_next, go_back
 
 start_dialog = Dialog(
     Window(
@@ -37,12 +37,33 @@ start_dialog = Dialog(
     )
 )
 
-
 schedule_dialog = Dialog(
     Window(
-        Format("{monday_schedule}"),
-        Button(Const('>>'), id='mon_button', on_click=go_next),
-        state=MainFSM.monday,
-        getter=monday_schedule
+        Const('Выберите день недели:'),
+        Group(
+            Select(
+                Format('{item[0]}'),
+                id='day',
+                item_id_getter=lambda x: x[1],
+                items='days',
+                on_click=day_schedule,
+            ),
+            width=1
+        ),
+        getter=get_days,
+        state=MainFSM.choose_day
+    ),
+    Window(
+        Const('Расписание на день:\n\n'),
+        Format('{day_schedule'),
+        Column(
+            Url(text=Const('Расписание на сайте ВлГУ'),
+                url=Const('https://www.vlsu.ru/fileadmin/Dispetcher/2024-2025/osen/KITP.pdf'),
+                id='site_button'),
+            Button(Const('Назад'),
+                   id='back_button',
+                   on_click=go_back)),
+        state=MainFSM.day_schedule,
+        getter=get_day_schedule
     )
 )

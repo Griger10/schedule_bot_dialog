@@ -9,3 +9,4 @@ class ISchedule(ABC):
     @abstractmethod
     async def get_week_type(self):
         raise NotImplementedError
+

@@ -10,10 +10,9 @@ class ScheduleRealization(ISchedule):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_schedule(self, telegram_id: int, day: str):
+    async def get_schedule(self, telegram_id: int, day: int):
         type_of_week = self.get_week_type()
         group = await GroupRealization.get_group(self.session, telegram_id)
-        day = day.strip()
         s = aliased(Schedule)
         ls = aliased(Lesson)
         tables = join(ls, s, s.lesson_id == ls.id)
