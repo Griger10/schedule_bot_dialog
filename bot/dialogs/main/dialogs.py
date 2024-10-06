@@ -54,8 +54,8 @@ schedule_dialog = Dialog(
         state=MainFSM.choose_day
     ),
     Window(
-        Const('Расписание на день:\n\n'),
-        Format('{day_schedule'),
+        Const('Расписание на день:\n'),
+        Format('{day_schedule}'),
         Column(
             Url(
                 text=Const('Расписание на сайте ВлГУ'),

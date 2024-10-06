@@ -16,7 +16,6 @@ async def choose_group(callback: CallbackQuery, widget: Select, dialog_manager: 
     group_repository = GroupRealization(session)
     await group_repository.set_group(int(item_id), callback.message.chat.id)
     await dialog_manager.switch_to(StartFSM.welcome_message)
-    await callback.answer()
 
 
 async def day_schedule(callback: CallbackQuery, widget: Select,
@@ -24,7 +23,6 @@ async def day_schedule(callback: CallbackQuery, widget: Select,
     session = dialog_manager.middleware_data['session']
     schedule_repository = ScheduleRealization(session)
     lessons = await schedule_repository.get_schedule(callback.message.chat.id, int(item_id))
-    res = '\n\n'.join(f"{ls.number_of_lesson} пара в {ls.audience_number} --- <b>{ls.name}" for ls in lessons)
+    res = '\n\n'.join(f"{ls[0]} пара в {ls[1]} --- <b>{ls[2]}</b>" for ls in lessons)
     dialog_manager.dialog_data.update(day_schedule=res)
     await dialog_manager.switch_to(MainFSM.day_schedule)
-    await callback.answer()

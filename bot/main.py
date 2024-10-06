@@ -5,14 +5,14 @@ from aiogram.enums import ParseMode
 from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from aiogram_dialog import setup_dialogs
-from bot.dialogs.main.dialogs import start_dialog
+from bot.dialogs.main.dialogs import start_dialog, schedule_dialog
 from bot.handlers import commands, admin_commands
 from bot.middlewares.i18n import TranslatorRunnerMiddleware
 from bot.middlewares.session import DatabaseMiddleware
 from bot.middlewares.type_of_week import TypeOfWeekMiddleware
 from bot.middlewares.users import TrackAllUsersMiddleware
 from bot.utils.i18n import create_translator_hub
-from config import load_config, load_database
+from bot.config.config import load_config, load_database
 from aiogram import Bot, Dispatcher
 import asyncio
 from sqlalchemy import text
@@ -42,6 +42,7 @@ async def main():
     dp.include_router(admin_commands.router)
     dp.include_router(commands.router)
     dp.include_router(start_dialog)
+    dp.include_router(schedule_dialog)
 
     setup_dialogs(dp)
 
