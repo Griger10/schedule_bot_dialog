@@ -17,3 +17,4 @@ async def choose_group(callback: CallbackQuery, widget: Select, dialog_manager: 
     await dialog_manager.switch_to(StartFSM.welcome_message)
     await callback.answer()
 
+

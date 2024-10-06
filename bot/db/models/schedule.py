@@ -11,5 +11,5 @@ class Schedule(Base):
     number_of_lesson: Mapped[int]
     audience: Mapped[str]
     lesson_id: Mapped[int] = mapped_column(ForeignKey("lessons.id"))
-    type: Mapped[int | None]
+    type: Mapped[bool]  # Числитель - False, Знаменатель - True
     group: Mapped[int] = mapped_column(ForeignKey("groups.id"), index=True)

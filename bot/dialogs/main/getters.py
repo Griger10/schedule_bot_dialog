@@ -1,6 +1,7 @@
 from aiogram.types import User
 from aiogram_dialog import DialogManager
 from bot.db.repositories.group_realization import GroupRealization
+from bot.db.repositories.lesson_realization import LessonRealization
 from fluentogram import TranslatorRunner
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -19,3 +20,10 @@ async def get_groups(session: AsyncSession, dialog_manager: DialogManager, **kwa
 
 async def get_welcome(dialog_manager: DialogManager, i18n: TranslatorRunner, **kwargs):
     return {'welcome_user': i18n.welcome.user()}
+
+
+async def monday_schedule(dialog_manager: DialogManager, i18n: TranslatorRunner,
+                          session: AsyncSession, event_from_user: User, **kwargs):
+    user_id = event_from_user.id
+    l = LessonRealization(session=session)
+    lessons = await l.get_lessons(user_id, )

@@ -1,4 +1,4 @@
-from bot.db.models import User, Group, Schedule, Lesson
+from bot.db.models import User, Group, Schedule, Lesson, WeekType
 
 from bot.db.base import Base
 
@@ -7,5 +7,6 @@ __all__ = [
     'User',
     'Group',
     'Schedule',
-    'Lesson'
+    'Lesson',
+    'WeekType'
 ]

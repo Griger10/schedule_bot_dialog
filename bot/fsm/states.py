@@ -8,4 +8,8 @@ class StartFSM(StatesGroup):
 
 
 class MainFSM(StatesGroup):
-    hello = State()
+    monday = State()
+    tuesday = State()
+    wednesday = State()
+    thursday = State()
+    friday = State()
