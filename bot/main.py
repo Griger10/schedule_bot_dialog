@@ -9,6 +9,7 @@ from bot.dialogs.main.dialogs import start_dialog
 from bot.handlers import commands, admin_commands
 from bot.middlewares.i18n import TranslatorRunnerMiddleware
 from bot.middlewares.session import DatabaseMiddleware
+from bot.middlewares.type_of_week import TypeOfWeekMiddleware
 from bot.middlewares.users import TrackAllUsersMiddleware
 from bot.utils.i18n import create_translator_hub
 from config import load_config, load_database
@@ -35,6 +36,7 @@ async def main():
 
     dp.update.middleware(TranslatorRunnerMiddleware())
     dp.update.outer_middleware(DatabaseMiddleware(session_maker))
+    dp.update.outer_middleware(TypeOfWeekMiddleware())
     dp.message.outer_middleware(TrackAllUsersMiddleware())
 
     dp.include_router(admin_commands.router)
