@@ -57,7 +57,8 @@ schedule_dialog = Dialog(
         Const('Расписание на день:\n\n'),
         Format('{day_schedule'),
         Column(
-            Url(text=Const('Расписание на сайте ВлГУ'),
+            Url(
+                text=Const('Расписание на сайте ВлГУ'),
                 url=Const('https://www.vlsu.ru/fileadmin/Dispetcher/2024-2025/osen/KITP.pdf'),
                 id='site_button'),
             Button(Const('Назад'),
