@@ -8,7 +8,7 @@ from aiogram_dialog import setup_dialogs
 from bot.infrastructure.scheduler.taskiq_broker import redis_source, broker
 from bot.infrastructure.scheduler.tasks import change_type_of_week_automation
 from bot.dialogs.main.dialogs import start_dialog, schedule_dialog
-from bot.handlers import commands, admin_commands
+from bot.handlers import commands, admin_commands, other_handlers
 from bot.middlewares.i18n import TranslatorRunnerMiddleware
 from bot.middlewares.session import DatabaseMiddleware
 from bot.middlewares.type_of_week import TypeOfWeekMiddleware
@@ -49,6 +49,8 @@ async def main():
     dp.include_router(schedule_dialog)
 
     setup_dialogs(dp)
+
+    dp.include_router(other_handlers.router)
 
     await broker.startup()
 
