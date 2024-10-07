@@ -6,7 +6,6 @@ from bot.db.repositories.lesson_realization import LessonRealization
 from bot.infrastructure.scheduler.tasks import change_type_of_week
 from fluentogram import TranslatorRunner
 from sqlalchemy.ext.asyncio import AsyncSession
-from taskiq_redis import RedisScheduleSource
 
 
 router = Router()
@@ -42,5 +41,5 @@ async def add_lesson_to_schedule(message: Message, i18n: TranslatorRunner, sessi
 
 @router.message(Command(commands=['change_week_type']))
 async def change_week_type(message: Message, i18n: TranslatorRunner, session: AsyncSession):
-    await change_type_of_week.kiq()
+    await change_type_of_week.kiq(session)
     await message.answer(i18n.type_of_week.change_success())

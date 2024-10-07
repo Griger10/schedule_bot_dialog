@@ -5,6 +5,8 @@ from aiogram.enums import ParseMode
 from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from aiogram_dialog import setup_dialogs
+from bot.infrastructure.scheduler.taskiq_broker import redis_source
+from bot.infrastructure.scheduler.tasks import change_type_of_week_automation
 from bot.dialogs.main.dialogs import start_dialog, schedule_dialog
 from bot.handlers import commands, admin_commands
 from bot.middlewares.i18n import TranslatorRunnerMiddleware
@@ -45,6 +47,11 @@ async def main():
     dp.include_router(schedule_dialog)
 
     setup_dialogs(dp)
+
+    await change_type_of_week_automation.schedule_by_cron(
+        session_maker,
+        source=redis_source,
+        cron='0 20 * * 5')
 
     print('start bot...')
     await dp.start_polling(bot, _translator_hub=translator_hub)
