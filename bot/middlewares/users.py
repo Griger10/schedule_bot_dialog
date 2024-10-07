@@ -23,6 +23,7 @@ class TrackAllUsersMiddleware(BaseMiddleware):
 
         user = await user_repository.check_user(user_id)
         if user is None:
+            username = event.from_user.username or 'Stranger'
             await user_repository.upsert_user(
                 tg_id=event.from_user.id,
                 username=event.from_user.username

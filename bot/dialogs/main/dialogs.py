@@ -2,7 +2,7 @@ from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button, Select, Group, Row, Url, Column
 from aiogram_dialog.widgets.text import Format, Const
 from bot.dialogs.main.getters import get_hello, get_groups, get_welcome, get_days, get_day_schedule
-from bot.dialogs.main.handlers import set_group_dialog, choose_group, day_schedule
+from bot.dialogs.main.handlers import set_group_dialog, choose_group, day_schedule, start_schedule
 from bot.fsm.states import StartFSM, MainFSM
 from bot.utils.dialogs import go_next, go_back
 
@@ -32,6 +32,7 @@ start_dialog = Dialog(
     ),
     Window(
         Format('{welcome_user}'),
+        Button(Const('Перейти к расписанию'), id='go_schedule', on_click=start_schedule),
         getter=get_welcome,
         state=StartFSM.welcome_message,
     )
@@ -39,6 +40,7 @@ start_dialog = Dialog(
 
 schedule_dialog = Dialog(
     Window(
+        Format('{type_of_week}'),
         Const('Выберите день недели:'),
         Group(
             Select(
