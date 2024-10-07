@@ -35,6 +35,6 @@ class ScheduleRealization(ISchedule):
             cur_week_type = 0
         else:
             cur_week_type = 1
-        stmt = update(WeekType).where(WeekType.id == 1).values(week_type=cur_week_type)
+        stmt = update(WeekType).where(WeekType.id == 1).values(type_code=cur_week_type)
         await self.session.execute(stmt)
         await self.session.commit()

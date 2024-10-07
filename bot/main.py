@@ -5,7 +5,7 @@ from aiogram.enums import ParseMode
 from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from aiogram_dialog import setup_dialogs
-from bot.infrastructure.scheduler.taskiq_broker import redis_source
+from bot.infrastructure.scheduler.taskiq_broker import redis_source, broker
 from bot.infrastructure.scheduler.tasks import change_type_of_week_automation
 from bot.dialogs.main.dialogs import start_dialog, schedule_dialog
 from bot.handlers import commands, admin_commands
@@ -22,13 +22,15 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
 
 async def main():
-    redis = Redis(host='localhost')
-    storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
     config = load_config()
     database_config = load_database()
 
     engine = create_async_engine(url=database_config.dsn, echo=database_config.is_echo)
     session_maker = async_sessionmaker(engine, expire_on_commit=False)
+
+    redis = Redis(host='localhost')
+    storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
+
     async with engine.begin() as connection:
         await connection.execute(text('SELECT 1'))
 
@@ -48,13 +50,15 @@ async def main():
 
     setup_dialogs(dp)
 
+    await broker.startup()
+
     await change_type_of_week_automation.schedule_by_cron(
-        session_maker,
         source=redis_source,
         cron='0 20 * * 5')
 
     print('start bot...')
-    await dp.start_polling(bot, _translator_hub=translator_hub)
+    await dp.start_polling(bot, _translator_hub=translator_hub, redis_source=redis_source)
+    await broker.shutdown()
 
 
 if __name__ == '__main__':

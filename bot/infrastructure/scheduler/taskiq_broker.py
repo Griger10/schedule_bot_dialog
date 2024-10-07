@@ -1,9 +1,9 @@
 from taskiq import TaskiqScheduler, TaskiqEvents, TaskiqState
 from taskiq_redis import RedisScheduleSource
-from taskiq_nats import NatsBroker
+from taskiq_nats import PullBasedJetStreamBroker
 from taskiq.schedule_sources import LabelScheduleSource
 
-broker = NatsBroker(servers=['nats://localhost:4222'], queue='main_tasks')
+broker = PullBasedJetStreamBroker(['nats://localhost:4222'], queue='taskiq_tasks')
 
 redis_source = RedisScheduleSource(url='redis://localhost:6379')
 
