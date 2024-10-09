@@ -28,7 +28,7 @@ async def main():
     engine = create_async_engine(url=database_config.dsn, echo=database_config.is_echo)
     session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
-    redis = Redis(host='localhost')
+    redis = Redis(host='redis', port=6379)
     storage = RedisStorage(redis=redis, key_builder=DefaultKeyBuilder(with_destiny=True))
 
     async with engine.begin() as connection:
