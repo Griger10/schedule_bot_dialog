@@ -1,5 +1,4 @@
 import sys
-from asyncio import WindowsSelectorEventLoopPolicy
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.base import DefaultKeyBuilder
@@ -65,5 +64,6 @@ async def main():
 
 if __name__ == '__main__':
     if sys.platform == 'win32':
+        from asyncio import WindowsSelectorEventLoopPolicy
         asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
     asyncio.run(main())
