@@ -1,7 +1,7 @@
 from aiogram.types import User
 from aiogram_dialog import DialogManager
-from bot.db.repositories.group_realization import GroupRealization
-from bot.db.repositories.schedule_realization import ScheduleRealization
+from db.repositories.group_realization import GroupRealization
+from db.repositories.schedule_realization import ScheduleRealization
 from fluentogram import TranslatorRunner
 from sqlalchemy.ext.asyncio import AsyncSession
 

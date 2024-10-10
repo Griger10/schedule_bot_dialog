@@ -1,5 +1,5 @@
-from bot.db import User
-from bot.db.repositories.user_interface import IUser
+from db import User
+from db.repositories.user_interface import IUser
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.dialects.postgresql import insert as upsert

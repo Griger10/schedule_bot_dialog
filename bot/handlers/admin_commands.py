@@ -1,9 +1,9 @@
 from aiogram import Router, F
 from aiogram.filters import Command, MagicData
 from aiogram.types import Message
-from bot.db.repositories.group_realization import GroupRealization
-from bot.db.repositories.lesson_realization import LessonRealization
-from bot.infrastructure.scheduler.tasks import change_type_of_week
+from db.repositories.group_realization import GroupRealization
+from db.repositories.lesson_realization import LessonRealization
+from infrastructure.scheduler.tasks import change_type_of_week
 from fluentogram import TranslatorRunner
 from sqlalchemy.ext.asyncio import AsyncSession
 from taskiq_redis import RedisScheduleSource

@@ -1,5 +1,5 @@
 from aiogram import BaseMiddleware
-from bot.db.repositories.schedule_realization import ScheduleRealization
+from db.repositories.schedule_realization import ScheduleRealization
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

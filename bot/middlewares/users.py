@@ -2,7 +2,7 @@ from typing import Callable, Awaitable, Dict, Any, cast
 
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Message
-from bot.db.repositories.user_realization import UserRealization
+from db.repositories.user_realization import UserRealization
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

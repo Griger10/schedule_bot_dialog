@@ -3,8 +3,8 @@ from aiogram.filters import Command
 from aiogram.types import Message
 from aiogram.utils.markdown import hlink
 from aiogram_dialog import DialogManager, StartMode
-from bot.fsm.states import StartFSM, MainFSM
-from bot.utils.main_menu import set_main_menu
+from fsm.states import StartFSM, MainFSM
+from utils.main_menu import set_main_menu
 from fluentogram import TranslatorRunner
 
 router = Router()

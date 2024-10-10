@@ -1,8 +1,8 @@
 import asyncio
 
-from bot.db import WeekType, Schedule, Lesson
-from bot.db.repositories.group_realization import GroupRealization
-from bot.db.repositories.schedule_interface import ISchedule
+from db import WeekType, Schedule, Lesson
+from db.repositories.group_realization import GroupRealization
+from db.repositories.schedule_interface import ISchedule
 from sqlalchemy import select, or_, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased, join

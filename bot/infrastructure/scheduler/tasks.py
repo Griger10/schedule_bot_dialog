@@ -1,6 +1,6 @@
-from bot.db.repositories.schedule_realization import ScheduleRealization
-from bot.infrastructure.scheduler.taskiq_broker import broker
-from bot.utils.db_connection import load_connection
+from db.repositories.schedule_realization import ScheduleRealization
+from infrastructure.scheduler.taskiq_broker import broker
+from utils.db_connection import load_connection
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

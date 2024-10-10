@@ -1,9 +1,9 @@
 from aiogram.types import User, CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.kbd import Button, Select
-from bot.db.repositories.group_realization import GroupRealization
-from bot.db.repositories.schedule_realization import ScheduleRealization
-from bot.fsm.states import StartFSM, MainFSM
+from db.repositories.group_realization import GroupRealization
+from db.repositories.schedule_realization import ScheduleRealization
+from fsm.states import StartFSM, MainFSM
 
 
 async def set_group_dialog(callback: CallbackQuery, button: Button, dialog_manager: DialogManager):

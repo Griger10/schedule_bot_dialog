@@ -1,4 +1,4 @@
-from bot.config.config import load_database
+from config.config import load_database
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
 

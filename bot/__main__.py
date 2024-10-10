@@ -4,16 +4,16 @@ from aiogram.enums import ParseMode
 from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from aiogram_dialog import setup_dialogs
-from bot.infrastructure.scheduler.taskiq_broker import redis_source, broker
-from bot.infrastructure.scheduler.tasks import change_type_of_week_automation
-from bot.dialogs.main.dialogs import start_dialog, schedule_dialog
-from bot.handlers import commands, admin_commands, other_handlers
-from bot.middlewares.i18n import TranslatorRunnerMiddleware
-from bot.middlewares.session import DatabaseMiddleware
-from bot.middlewares.type_of_week import TypeOfWeekMiddleware
-from bot.middlewares.users import TrackAllUsersMiddleware
-from bot.utils.i18n import create_translator_hub
-from bot.config.config import load_config, load_database
+from infrastructure.scheduler.taskiq_broker import redis_source, broker
+from infrastructure.scheduler.tasks import change_type_of_week_automation
+from dialogs.main.dialogs import start_dialog, schedule_dialog
+from handlers import commands, admin_commands, other_handlers
+from middlewares.i18n import TranslatorRunnerMiddleware
+from middlewares.session import DatabaseMiddleware
+from middlewares.type_of_week import TypeOfWeekMiddleware
+from middlewares.users import TrackAllUsersMiddleware
+from utils.i18n import create_translator_hub
+from config.config import load_config, load_database
 from aiogram import Bot, Dispatcher
 import asyncio
 from sqlalchemy import text

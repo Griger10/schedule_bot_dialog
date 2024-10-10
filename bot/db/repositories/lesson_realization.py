@@ -1,5 +1,5 @@
-from bot.db import Lesson
-from bot.db.repositories.lesson_interface import ILesson
+from db import Lesson
+from db.repositories.lesson_interface import ILesson
 from sqlalchemy import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 

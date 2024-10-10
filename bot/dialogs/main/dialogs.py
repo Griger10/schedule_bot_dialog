@@ -1,10 +1,10 @@
 from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button, Select, Group, Row, Url, Column
 from aiogram_dialog.widgets.text import Format, Const
-from bot.dialogs.main.getters import get_hello, get_groups, get_welcome, get_days, get_day_schedule
-from bot.dialogs.main.handlers import set_group_dialog, choose_group, day_schedule, start_schedule
-from bot.fsm.states import StartFSM, MainFSM
-from bot.utils.dialogs import go_next, go_back
+from dialogs.main.getters import get_hello, get_groups, get_welcome, get_days, get_day_schedule
+from dialogs.main.handlers import set_group_dialog, choose_group, day_schedule, start_schedule
+from fsm.states import StartFSM, MainFSM
+from utils.dialogs import go_next, go_back
 
 start_dialog = Dialog(
     Window(

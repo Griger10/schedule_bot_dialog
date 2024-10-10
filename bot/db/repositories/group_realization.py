@@ -1,5 +1,5 @@
-from bot.db import Group, User
-from bot.db.repositories.group_interface import IGroup
+from db import Group, User
+from db.repositories.group_interface import IGroup
 from slugify import slugify
 from sqlalchemy import delete, select, update
 from sqlalchemy.dialects.postgresql import insert

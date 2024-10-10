@@ -1,8 +1,8 @@
-from bot.db.models.group import Group
-from bot.db.models.lesson import Lesson
-from bot.db.models.schedule import Schedule
-from bot.db.models.user import User
-from bot.db.models.week_type import WeekType
+from db.models.group import Group
+from db.models.lesson import Lesson
+from db.models.schedule import Schedule
+from db.models.user import User
+from db.models.week_type import WeekType
 
 
 __all__ = [
