@@ -3,7 +3,7 @@ from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.kbd import Button, Select
 from db.repositories.group_realization import GroupRealization
 from db.repositories.schedule_realization import ScheduleRealization
-from fsm.states import StartFSM, MainFSM
+from fsm.states import MainFSM, StartFSM
 
 
 async def set_group_dialog(callback: CallbackQuery, button: Button, dialog_manager: DialogManager):
