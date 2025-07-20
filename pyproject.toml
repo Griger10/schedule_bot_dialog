@@ -1,0 +1,14 @@
+[project]
+name = "schedule-bot-dialog"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "aiogram-dialog>=2.4.0",
+    "alembic>=1.16.4",
+    "asyncpg>=0.30.0",
+    "fluentogram>=1.2.1",
+    "pydantic-settings>=2.10.1",
+    "redis>=6.2.0",
+    "sqlalchemy>=2.0.41",
+]
