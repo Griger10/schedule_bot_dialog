@@ -2,11 +2,10 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
-from aiogram.client.default import DefaultBotProperties
-from aiogram.enums import ParseMode
 from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from aiogram_dialog import setup_dialogs
+from dishka.integrations.aiogram import setup_dishka as setup_aiogram_dishka
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
 from bot.dialogs import start_dialog, schedule_dialog
@@ -16,6 +15,7 @@ from bot.middlewares.session import DatabaseMiddleware
 from bot.middlewares.users import TrackAllUsersMiddleware
 from bot.utils.i18n import create_translator_hub
 from core.config import Config
+from core.di.ioc import create_container
 from core.logging import configure_logging
 
 configure_logging()
@@ -25,6 +25,8 @@ logger = logging.getLogger(__name__)
 
 async def main():
     config = Config()
+
+    container = create_container()
 
     engine = create_async_engine(
         url=config.postgres_config.database_url,
@@ -47,11 +49,12 @@ async def main():
         storage=storage,
         admin_ids=config.bot_config.admin_ids
     )
-    bot = Bot(
-        token=config.bot_config.token.get_secret_value(),
-        default=DefaultBotProperties(
-            parse_mode=ParseMode.HTML
-        )
+    bot = await container.get(Bot)
+
+    setup_aiogram_dishka(
+        router=dp,
+        container=container,
+        auto_inject=True,
     )
 
     dp.update.middleware(TranslatorRunnerMiddleware())

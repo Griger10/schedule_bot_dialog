@@ -1,6 +1,6 @@
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.dialects.postgresql import insert as upsert
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from models import User
 
@@ -25,7 +25,6 @@ class UserRepositoryImpl:
             username=username,
         )
         await self._session.execute(stmt)
-        await self._session.commit()
 
     async def get_user(self, tid: int) -> User | None:
         stmt = select(self.model).where(

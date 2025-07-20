@@ -1,6 +1,4 @@
-from core.interfaces.user_repository import UserRepository
-
-from core.interfaces.transaction_manager import TransactionManager
+from core.interfaces.repositories import UserRepository, TransactionManager
 
 __all__ = [
     'TransactionManager',

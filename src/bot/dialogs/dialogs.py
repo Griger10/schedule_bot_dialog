@@ -1,9 +1,9 @@
 from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button, Select, Group, Url, Column
 from aiogram_dialog.widgets.text import Format, Const
+
 from bot.dialogs.getters import get_hello, get_groups, get_welcome, get_days, get_day_schedule
 from bot.dialogs.handlers import set_group_dialog, choose_group, day_schedule, start_schedule
-
 from bot.fsm.states import StartFSM, MainFSM
 from bot.utils.dialogs import go_back
 

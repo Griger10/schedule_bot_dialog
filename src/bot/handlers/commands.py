@@ -29,4 +29,5 @@ async def help_(message: Message, dialog_manager: DialogManager, i18n: Translato
 
 @router.message(Command(commands=['contacts']))
 async def contacts(message: Message, dialog_manager: DialogManager, i18n: TranslatorRunner):
-    await message.answer(i18n.contacts.full() + ' ' + hlink(i18n.contacts.link(), 'https://t.me/griger10'))
+    text = i18n.contacts.full() + ' ' + hlink(i18n.contacts.link(), 'https://t.me/griger10')
+    await message.answer(text)

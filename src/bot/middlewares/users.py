@@ -5,6 +5,9 @@ from aiogram.types import TelegramObject, Message
 from cachetools import TTLCache
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from repositories import UserRepositoryImpl, TransactionManagerImpl
+from services.user_service import UserServiceImpl
+
 
 class TrackAllUsersMiddleware(BaseMiddleware):
     def __init__(self):
@@ -25,11 +28,12 @@ class TrackAllUsersMiddleware(BaseMiddleware):
 
         if user_id not in self.cache:
             session: AsyncSession = data["session"]
-            user_repo = UserService(
-                user_repo=UserRepository(session)
+            user_service = UserServiceImpl(
+                user_repo=UserRepositoryImpl(session),
+                transaction_manager=TransactionManagerImpl(session),
             )
 
-            await user_repo.add_user(
+            await user_service.add_user(
                 tid=event.from_user.id,
                 username=event.from_user.username,
                 first_name=event.from_user.first_name,

@@ -7,6 +7,7 @@ dependencies = [
     "aiogram-dialog>=2.4.0",
     "alembic>=1.16.4",
     "asyncpg>=0.30.0",
+    "dishka>=1.6.0",
     "fluentogram>=1.2.1",
     "pydantic-settings>=2.10.1",
     "redis>=6.2.0",
