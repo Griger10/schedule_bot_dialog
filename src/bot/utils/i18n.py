@@ -3,14 +3,16 @@ from fluentogram import TranslatorHub, FluentTranslator
 
 
 def create_translator_hub() -> TranslatorHub:
-    translator_hub = TranslatorHub({'ru': 'ru'},
-                                   [
-                                       FluentTranslator(
-                                           locale='ru',
-                                           translator=FluentBundle.from_files(
-                                               locale='ru-RU',
-                                               filenames=['bot/locales/ru/LC_MESSAGES/txt.ftl']
-                                           )),
-                                   ],
-                                   root_locale='ru')
+    translator_hub = TranslatorHub(
+        {'ru': 'ru'},
+        [
+            FluentTranslator(
+                locale='ru',
+                translator=FluentBundle.from_files(
+                    locale='ru-RU',
+                    filenames=['src/bot/locales/ru/txt.ftl']
+                )),
+        ],
+        root_locale='ru'
+    )
     return translator_hub

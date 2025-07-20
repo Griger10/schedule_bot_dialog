@@ -1,4 +1,5 @@
 import asyncio
+import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
@@ -15,6 +16,11 @@ from bot.middlewares.session import DatabaseMiddleware
 from bot.middlewares.users import TrackAllUsersMiddleware
 from bot.utils.i18n import create_translator_hub
 from core.config import Config
+from core.logging import configure_logging
+
+configure_logging()
+
+logger = logging.getLogger(__name__)
 
 
 async def main():
@@ -61,6 +67,7 @@ async def main():
 
     dp.include_router(other_handlers.router)
 
+    logger.info("Start bot...")
     await dp.start_polling(bot, _translator_hub=translator_hub)
 
 
