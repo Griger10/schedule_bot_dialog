@@ -1,7 +1,7 @@
 [project]
 name = "schedule-bot-dialog"
 version = "0.1.0"
-description = "Add your description here"
+description = "Schedule bot dialog project"
 requires-python = ">=3.13"
 dependencies = [
     "aiogram-dialog>=2.4.0",
