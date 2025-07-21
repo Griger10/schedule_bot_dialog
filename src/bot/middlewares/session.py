@@ -8,5 +8,5 @@ class DatabaseMiddleware(BaseMiddleware):
 
     async def __call__(self, handler, event, data):
         async with self.session_pool() as session:
-            data['session'] = session
+            data["session"] = session
             return await handler(event, data)

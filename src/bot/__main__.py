@@ -3,13 +3,13 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.base import DefaultKeyBuilder
-from aiogram.fsm.storage.redis import RedisStorage, Redis
+from aiogram.fsm.storage.redis import Redis, RedisStorage
 from aiogram_dialog import setup_dialogs
 from dishka.integrations.aiogram import setup_dishka as setup_aiogram_dishka
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from bot.dialogs import start_dialog, schedule_dialog
-from bot.handlers import commands, admin_commands, other_handlers
+from bot.dialogs import schedule_dialog, start_dialog
+from bot.handlers import admin_commands, commands, other_handlers
 from bot.middlewares.i18n import TranslatorRunnerMiddleware
 from bot.middlewares.session import DatabaseMiddleware
 from bot.middlewares.users import TrackAllUsersMiddleware
@@ -23,7 +23,7 @@ configure_logging()
 logger = logging.getLogger(__name__)
 
 
-async def main():
+async def main() -> None:
     config = Config()
 
     container = create_container()
@@ -74,5 +74,5 @@ async def main():
     await dp.start_polling(bot, _translator_hub=translator_hub)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(main())

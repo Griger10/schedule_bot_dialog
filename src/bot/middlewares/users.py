@@ -1,12 +1,14 @@
-from typing import Callable, Awaitable, Dict, Any, cast
+from typing import TYPE_CHECKING, Any, Awaitable, Callable, Dict, cast
 
 from aiogram import BaseMiddleware
-from aiogram.types import TelegramObject, Message
+from aiogram.types import Message, TelegramObject
 from cachetools import TTLCache
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from repositories import UserRepositoryImpl, TransactionManagerImpl
+from repositories import TransactionManagerImpl, UserRepositoryImpl
 from services.user_service import UserServiceImpl
+
+if TYPE_CHECKING:
+    from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class TrackAllUsersMiddleware(BaseMiddleware):
@@ -23,7 +25,7 @@ class TrackAllUsersMiddleware(BaseMiddleware):
             event: TelegramObject,
             data: Dict[str, Any],
     ) -> Any:
-        event = cast(Message, event)
+        event = cast("Message", event)
         user_id = event.from_user.id
 
         if user_id not in self.cache:

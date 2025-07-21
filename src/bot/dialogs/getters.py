@@ -11,7 +11,7 @@ async def get_hello(
         **kwargs
 ):
     first_name = event_from_user.first_name
-    return {'hello_user_text': i18n.start.text(first_name=first_name)}
+    return {"hello_user_text": i18n.start.text(first_name=first_name)}
 
 
 async def get_groups(
@@ -23,7 +23,7 @@ async def get_groups(
 async def get_welcome(
         dialog_manager: DialogManager, i18n: TranslatorRunner, **kwargs
 ):
-    return {'welcome_user_text': i18n.welcome.user()}
+    return {"welcome_user_text": i18n.welcome.user()}
 
 
 async def get_days(dialog_manager: DialogManager, session: AsyncSession, **kwargs):

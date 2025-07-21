@@ -1,6 +1,6 @@
-from dishka import Provider, provide, Scope
+from dishka import Provider, Scope, provide
 
-from core.interfaces import UserRepository, TransactionManager
+from core.interfaces import TransactionManager, UserRepository
 from core.interfaces.services.user_service import UserService
 from services.user_service import UserServiceImpl
 

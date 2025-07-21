@@ -1,4 +1,4 @@
-from core.interfaces import UserRepository, TransactionManager
+from core.interfaces import TransactionManager, UserRepository
 from models import User
 
 

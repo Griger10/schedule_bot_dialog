@@ -1,18 +1,18 @@
 from fluent_compiler.bundle import FluentBundle
-from fluentogram import TranslatorHub, FluentTranslator
+from fluentogram import FluentTranslator, TranslatorHub
 
 
 def create_translator_hub() -> TranslatorHub:
     translator_hub = TranslatorHub(
-        {'ru': 'ru'},
+        {"ru": "ru"},
         [
             FluentTranslator(
-                locale='ru',
+                locale="ru",
                 translator=FluentBundle.from_files(
-                    locale='ru-RU',
-                    filenames=['src/bot/locales/ru/txt.ftl']
+                    locale="ru-RU",
+                    filenames=["src/bot/locales/ru/txt.ftl"]
                 )),
         ],
-        root_locale='ru'
+        root_locale="ru"
     )
     return translator_hub
